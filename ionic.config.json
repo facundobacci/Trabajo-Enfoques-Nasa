@@ -1,0 +1,7 @@
+{
+  "name": "Trabajo-Enfoques-Nasa",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
