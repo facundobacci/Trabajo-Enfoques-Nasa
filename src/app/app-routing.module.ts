@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'imagen-astronomica/:fecha',
+    loadChildren: () => import('./pages/imagen-astronomica/imagen-astronomica.module').then( m => m.ImagenAstronomicaPageModule)
+  },
 ];
 
 @NgModule({

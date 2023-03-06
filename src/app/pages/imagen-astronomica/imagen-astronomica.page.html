@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Imagen astronomica</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item *ngFor="let img of imagenSeleccionada">
+  <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 5px;">
+  <ion-card>
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <img src="{{img.url}}" class="image"/>
+    </div>
+    <ion-card-header>
+      <ion-card-title>{{img.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-accordion-group>
+        <ion-accordion value="appearance" exp>
+          <ion-item slot="header">
+            <ion-label>Descripcion</ion-label>
+          </ion-item>
+          <ion-list slot="content">
+            <ion-item>
+              <ion-label class="ion-text-wrap">{{img.explanation}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+        <ion-accordion value="appearance">
+          <ion-item slot="header">
+            <ion-label>Fecha</ion-label>
+          </ion-item>
+          <ion-list slot="content">
+            <ion-item>
+              <ion-label>{{img.date}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
+  </div>
+</ion-item>
+<ion-item>
+  <!-- Botones favorite and share -->
+  <div style="align-items: center;justify-content: center;">
+    <ion-button color="light" style="float: right; margin-top: 5px;" (click)="favorite()">
+      <ion-icon id="notFavorite" name="star-outline"></ion-icon>
+      <ion-icon id="favorite" name="star" hidden></ion-icon>
+    </ion-button>
+    <ion-button color="light" style="float: right; margin-top: 5px;" (click)="compartir()"><ion-icon name="share-social-outline"></ion-icon></ion-button>
+  </div>
+  <!--  -->
+</ion-item>
+</ion-content>
+
+<!-- Searchbar in a Toolbar -->
+<ion-footer>
+  <ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-button size="medium" color="none" tab="home" (click)="return()">
+        <ion-icon name="arrow-back"></ion-icon>
+        <ion-label></ion-label>
+      </ion-button>
+      <ion-button size="medium" color="none" tab="information" (click)="information()">
+        <ion-icon name="information"></ion-icon>
+      </ion-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-toolbar>
+</ion-footer>

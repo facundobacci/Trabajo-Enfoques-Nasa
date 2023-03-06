@@ -1,20 +1,92 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar *ngIf="inicio">
+    <ion-title class="ion-text-center">La nasa - Consultas astronomicas</ion-title>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!inicio">
+    <ion-title class="ion-text-center">Imagenes marcadas como favoritas</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+<ion-content class="background">
+  <div *ngIf="inicio">
+    <ion-toolbar class="second-toolbar" >
+      <ion-list >
+        <section class="full-width">
+          <ion-button (click)="search()" expand="full" style="margin-top: 10px;">Imagen astronomica del dia</ion-button>
+        </section>
+        <ion-list>
+          <ion-item id="open-modal">
+            <ion-label>Imagen de un dia particular:</ion-label>
+            <ion-note slot="end">{{fecha | date}}</ion-note>
+          </ion-item>
+          <ion-modal trigger="open-modal" [cssClass]="'center'">
+            <ng-template>
+              <ion-datetime
+                presentation="date"
+                [(ngModel)]="fecha"
+                size="cover"
+                (click)="searchDay()"
+              ></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </ion-list>
+      </ion-list>
     </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-item *ngFor="let img of imagenDia">
+      <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 5px;">
+        <ion-card (click)="mostrarImagen(img.date)"> 
+          <div style="display: flex; align-items: center;justify-content: center; width: 80%; margin-left: 10%; margin-top: 6%;">
+            <img src="{{img.url}}"/>
+          </div>
+          <ion-card-header>
+            <ion-card-title>Imagen del dia: {{img.title}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-item>
+    <ion-item *ngFor="let img of imagenEnUnaFecha">
+      <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 5px;">
+        <ion-card (click)="mostrarImagen(img.date)"> 
+          <div style="display: flex; align-items: center;justify-content: center; width: 80%; margin-left: 10%; margin-top: 6%;">
+            <img src="{{img.url}}"/>
+          </div>
+          <ion-card-header>
+            <ion-card-title>Imagen de la fecha elegida: {{img.title}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-item>
+  </div>
+  <div *ngIf="!inicio">
+    <ion-item *ngFor="let imagen of favoritas">
+      <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 5px;">
+        <ion-card (click)="mostrarImagen(imagen.fecha)"> 
+          <div style="display: flex; align-items: center;justify-content: center; width: 80%; margin-left: 10%; margin-top: 6%;">
+            <img src="{{imagen.url}}"/>
+          </div>
+          <ion-card-header>
+            <ion-card-title>{{imagen.titulo}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+    </ion-item>
   </div>
 </ion-content>
+
+  <!-- Searchbar in a Toolbar -->
+<ion-footer>
+  <ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-button size="medium" color="none" tab="home" (click)="home()">
+        <ion-icon name="home"></ion-icon>
+      </ion-button>
+      <ion-button size="medium" color="none" tab="star" (click)="getFavorites()">
+        <ion-icon name="star"></ion-icon>
+      </ion-button>
+      <ion-button size="medium" color="none" tab="information" (click)="information()">
+        <ion-icon name="information"></ion-icon>
+      </ion-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-toolbar>
+</ion-footer>

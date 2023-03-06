@@ -1,27 +1,49 @@
-#container {
+ion-content.background{
+  --background: url(../../assets/fondo1.png) 0 0/100% 100% no-repeat;
+}
+
+ion-toolbar{
+  height: 50px;
+}
+
+ion-title{
+  color: rgb(255, 255, 255);
+  font-size:14px;
+}
+
+.text-center{
+  color: rgb(255, 255, 255);
+  font-size:medium;
+}
+
+ion-button{
+  color: rgb(255, 255, 255);
+}
+
+ion-label{
+  color: rgb(255, 255, 255);
+}
+
+.second-toolbar{
+  height: 105px;
+}
+
+
+ion-card-title{
+  font-size: medium;
   text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  color: rgb(255, 255, 255);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+ion-modal {
+  &.center {
+    --width: calc(100% - 2em);
+    align-items: center;
+    --height: auto;
+    .ion-page {
+      position: relative;
+      display: block;
+      contain: content;
+    }
+  }
 }
