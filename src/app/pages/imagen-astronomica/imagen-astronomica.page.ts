@@ -98,7 +98,7 @@ export class ImagenAstronomicaPage implements OnInit {
 
   compartir(){
     var options = {
-      text:this.imagenSeleccionada[0]["title"],
+      message:this.imagenSeleccionada[0]["title"],
       url: this.imagenSeleccionada[0]["url"],
     };
     this.socialSharing.shareWithOptions(options);
