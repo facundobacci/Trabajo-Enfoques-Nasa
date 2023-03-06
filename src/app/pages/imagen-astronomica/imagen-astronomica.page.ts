@@ -37,21 +37,6 @@ export class ImagenAstronomicaPage implements OnInit {
     }, (err: HttpErrorResponse) => {
       console.log('Estado de error: ', err.status, typeof err.status);
       this.imagenSeleccionada[0] = []
-      this.database.findFavorita(this.fecha).then((data) =>{
-        if (data.rows.length > 0){
-          let result=data.rows.item(0)
-          this.imagen={
-            url:result.url,
-            titulo:result.titulo,
-            descripcion : result.explicacion,
-            fecha : result.fecha,
-          }
-          this.toastMsg("Sin Conexión, datos recuperados por base.");
-        }else{
-          this.imagen={}
-          this.toastMsg("Sin Conexión");
-        }
-      })
     }
   )}
 
@@ -112,9 +97,11 @@ export class ImagenAstronomicaPage implements OnInit {
   }
 
   compartir(){
-    let imageUrl= this.imagenSeleccionada[0]["url"]
-    let text= "Mi imagen astronomica favorita es: " + this.imagenSeleccionada[0]["title"]
-    this.socialSharing.share(text,"",imageUrl)
+    var options = {
+      text:this.imagenSeleccionada[0]["title"],
+      url: this.imagenSeleccionada[0]["url"],
+    };
+    this.socialSharing.shareWithOptions(options);
   }
 
   async toastMsg(msg) {
